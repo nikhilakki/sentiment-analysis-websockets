@@ -96,7 +96,7 @@ class AudioHandler(tornado.websocket.WebSocketHandler):
             message = json.loads(message)
             if 'results' in message:
                 transcript = message['results'][0]['alternatives'][0]['transcript']
-                tone_results = self.tone_analyzer.tone(text=transcript)
+                tone_results = self.tone_analyzer.tone({"text": transcript})
                 tones = tone_results['document_tone']['tone_categories'][0]['tones']
 
                 DashboardHandler.send_updates(json.dumps(tones))
