@@ -18,20 +18,20 @@ class CallObjectServer():
         self.nexmo_client.create_call({
             'to': [{'type': 'phone', 'number': os.environ['TEST_HANDSET']}],
             'from': {'type': 'phone', 'number': os.environ['NEXMO_FROM_NUMBER']},
-            'answer_url': ['https://nexmo-sentiment.ngrok.io/moderator']
+            'answer_url': ['https://rtsa.ngrok.io/moderator']
         })
 
         self.ws_call = self.nexmo_client.create_call({
             'to': [
                 {
                     "type": "websocket",
-                    "uri": "ws://nexmo-sentiment-sockets.ngrok.io/audio",
+                    "uri": "ws://rtsa-ws.ngrok.io/audio",
                     "content-type": "audio/l16;rate=16000",
                     "headers": {}
                 }
             ],
             'from': {'type': 'phone', 'number': os.environ['NEXMO_FROM_NUMBER']},
-            'answer_url': ['https://nexmo-sentiment.ngrok.io/attendee']
+            'answer_url': ['https://rtsa.ngrok.io/attendee']
         })
 
         return [
@@ -43,7 +43,7 @@ class CallObjectServer():
                 "action": "conversation",
                 "name": self.conversation_name,
                 "startOnEnter": "false",
-                "musicOnHoldUrl": ["https://nexmo-sentiment.ngrok.io/hold.mp3"]
+                "musicOnHoldUrl": ["https://rtsa.ngrok.io/hold.mp3"]
             }
         ]
 
@@ -63,7 +63,7 @@ class CallObjectServer():
                 "action": "conversation",
                 "name": self.conversation_name,
                 "startOnEnter": "false",
-                "musicOnHoldUrl": ["https://nexmo-sentiment.ngrok.io/hold.mp3"]
+                "musicOnHoldUrl": ["https://rtsa.ngrok.io/hold.mp3"]
             }
         ]
 
